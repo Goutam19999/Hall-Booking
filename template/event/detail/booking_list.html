@@ -1,0 +1,53 @@
+
+{% extends "event/base.html" %}
+{% block content %}
+  <main>
+    <h1>Pending List</h1>
+    <table id="bookingTable" class="display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Hall Name</th>
+          <th>Customer Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Total Price</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in book %}
+          <tr>
+            <td>{{ book.hall }}</td>
+            <td>{{ book.customer_name }}</td>
+            <td>{{ book.start_datetime }}</td>
+            <td>{{ book.end_datetime }}</td>
+            <td>{{ book.total_price }}</td>
+            <td>{{ book.status }}</td>
+            {% if book.status == 'pending' and user.is_superuser %}
+              <td>
+                <a href="{% url 'accept_booking' book.id %}">Accept</a> |
+                <a href="{% url 'reject_booking' book.id %}">Reject</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock content %}
+{% block extra_scripts %}
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#bookingTable').DataTable({
+        "paging": true,
+        "searching": true,
+        "ordering": true
+      });
+    });
+  </script>
+{% endblock %}

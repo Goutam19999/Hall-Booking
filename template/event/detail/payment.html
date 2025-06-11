@@ -1,0 +1,29 @@
+
+{% extends "event/base.html" %}
+{% block content %}
+<h2 style="text-align: center;">{{ hall_name }} Payment Form</h2>
+
+<form class="form-control" method="post">
+    {% csrf_token %}
+    
+    <p>{{ form.name.label_tag }} {{ form.name }}</p>
+    <p>{{ form.email.label_tag }} {{ form.email }}</p>
+    <p>{{ form.amount.label_tag }} {{ form.amount }}</p>
+    
+    <p>{{ form.payment_method.label_tag }} {{ form.payment_method }}</p>
+
+    <div id="card_fields">
+        <p>{{ form.card_number.label_tag }} {{ form.card_number }}</p>
+    </div>
+
+    <div id="upi_fields" style="display: none;">
+        <p>{{ form.upi_id.label_tag }} {{ form.upi_id }}</p>
+    </div>
+
+    <button type="submit">Pay</button>
+</form>
+
+<h5 style="padding: 5px;">
+    N.B. - Make sure you want to book the hall. Once payment is received, it's non-refundable.
+</h5>
+{% endblock content %}

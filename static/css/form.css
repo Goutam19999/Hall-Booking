@@ -1,0 +1,53 @@
+form.form-control {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+form.form-control p {
+  margin-bottom: 20px;
+}
+
+form.form-control label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+form.form-control input,
+form.form-control select,
+form.form-control textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+form.form-control input:focus,
+form.form-control select:focus,
+form.form-control textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form.form-control button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+form.form-control button[type="submit"]:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,76 @@
+{% extends "event/base.html" %}
+{% block content %}
+  <h2 style="text-align: center;"> {{ view.hall.name }} Booking Form</h2>
+  <div id="message"
+       style="margin-top: 1em;
+              text-align: center;
+              font-weight: bold"></div>
+  <form id="booking-form" method="post" class="form-control">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" id="hall-id" value="{{ view.hall.id }}">
+    <button type="submit" class="form-control">Submit</button>
+  </form>
+  <!-- flatpickr CSS and JS -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Initialize flatpickr on start datetime input
+    const startPicker = flatpickr("#id_start_datetime", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      onChange: function(selectedDates, dateStr, instance) {
+        if (selectedDates.length > 0) {
+          // Close start datetime calendar popup
+          instance.close();
+
+          // Set minDate of endPicker to selected start date/time
+          endPicker.set('minDate', selectedDates[0]);
+
+          // Open end datetime calendar automatically
+          endPicker.open();
+        }
+      }
+    });
+
+    // Initialize flatpickr on end datetime input
+    const endPicker = flatpickr("#id_end_datetime", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+    });
+
+    // Form submit ajax etc can stay as you had (or simplified)
+    $('#booking-form').on('submit', function (e) {
+      e.preventDefault();
+
+      const hallId = $('#hall-id').val();
+      const start = $('#id_start_datetime').val();
+      const end = $('#id_end_datetime').val();
+      const csrf = $('input[name=csrfmiddlewaretoken]').val();
+
+      $.ajax({
+      type: 'POST',
+      url: "{% url 'check_availability' %}",
+      data: {
+        'hall_id': hallId,
+        'start_datetime': start,
+        'end_datetime': end,
+        'csrfmiddlewaretoken': csrf,
+      },
+      success: function (response) {
+        if (response.available) {
+          $('#message').css('color', 'green').text("Booking successful! Submitting form...");
+          $('#booking-form')[0].submit();
+        } else {
+          $('#message').css('color', 'red').text("The selected date range is already booked.");
+        }
+      },
+      error: function () {
+        $('#message').css('color', 'red').text("Error checking availability. Please try again.");
+      }
+    });
+  });
+  </script>
+  {% endblock %}

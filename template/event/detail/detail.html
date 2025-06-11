@@ -1,0 +1,59 @@
+{% extends 'event/base.html' %}
+{% block content %}
+  <div>
+    <h3 style="text-align: center;">{{ hall.name }}</h3>
+    <div>
+      <div>
+        <div class="slideshow-container">
+          {% for image in hall.images.all %}
+            <img class="slideshow-image"
+                 src="{{ image.image.url }}"
+                 alt="Image for {{ hall.name }}">
+          {% endfor %}
+          <button id="prevBtn">&#10094;</button>
+          <button id="nextBtn">&#10095;</button>
+        </div>
+        <!-- Hall Details -->
+        <div style="padding: 5px; margin: 5px;">
+          <h5>Descriptions</h5>
+          <p>{{ hall.description }}</p>
+          <h5>Details about Hall</h5>
+          <b>
+            1. Location :- {{ hall.location }}
+            <br>
+            2. Seating-Capacity :- {{ hall.seating_capacity }}
+            <br>
+            3. Price/Day :- {{ hall.price_per_day }}
+            <br>
+          </b>
+          <p>
+            <strong>Amenities:</strong>
+            <br>
+            {% for amenity in hall.amenities.all %}
+              <span class="badge bg-secondary">{{ amenity.name }}</span>
+            {% empty %}
+              <span class="text-muted">No amenities listed</span>
+            {% endfor %}
+          </p>
+          <p>
+            <strong>Rating:</strong> {{ hall.rating }}/5
+          </p>
+          <h5>Booked Dates</h5>
+          <ul>
+            {% if booked_dates %}
+              {% for date in booked_dates %}<li>{{ date }}</li>{% endfor %}
+            {% else %}
+              <li>No date booked</li>
+            {% endif %}
+          </ul>
+        </div>
+        <a href="{% url 'create_booking' hall.id %}"
+           style="text-decoration: none">
+          <div style="text-align: center;">
+            <button id="showAvailabilityBtn">Book</button>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% load static %}
+{% if user.is_authenticated %}
+  <header>
+    <a href="/" class="logo">
+      <img src="{% static 'img/download.jpeg' %}" alt="Event">
+    </a>
+
+    <div class="right-part">
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">LOGOUT</button>
+      </form>
+
+      <div id="user" onclick="toggleFloatingOptions()" style="position: relative; cursor: pointer;">
+        <img src="{% static 'img/user.jpg' %}" alt="User">
+        <span id="user-name">{{ user.username|upper }}</span>
+
+        {% if user.username == "goutam" %}
+          <div id="floating-menu" class="floating-box" style="display: none; top: 40px;">
+            <ul>
+              <li><a href="{% url 'add-hall' %}">Add Hall</a></li>
+              <li><a href="{% url 'show-table-data' %}">Booking Data</a></li>
+              <li><a href="{% url 'booking_list' %}">Pending Bookings </a></li>
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+{% else %}
+  <header>
+    <a href="/" class="logo">
+      <img src="{% static 'img/download.jpeg' %}" alt="Event">
+    </a>
+    <a href="{% url 'login' %}">
+      <button class="login-button">Login</button>
+    </a>
+  </header>
+{% endif %}

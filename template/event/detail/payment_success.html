@@ -1,0 +1,77 @@
+{% extends "event/base.html" %}
+{% load static %}
+
+{% block content %}
+  <div>
+    <button id="download-doc" style="border: none;">
+      <img src="{% static 'img/msword.png' %}"
+           style="width: 60px; float: right"
+           alt="download">
+    </button>
+  </div>
+
+  <div id="doc-content">
+    <div>
+      <h2 style="text-align: center;">{{ hall.name }}</h2>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; padding: 70px;">
+      <div style="text-align: center;">
+        <h4>Booking Successful!</h4>
+      </div>
+      <div>
+        <h2 style="color: rgb(186, 108, 51);">RECEIPT</h2>
+      </div>
+    </div>
+
+    <div>
+      <div style="text-align: center;">
+        <b>
+          {% if payment %}
+            <h5>Payment Info:</h5>
+            <ul style="list-style-type: none;">
+              <li>Amount: ₹{{ payment.amount }}</li>
+              <li>Payment Mode: {{ payment.payment_method }}</li>
+              <li>Email: {{ payment.email }}</li>
+              <li>Name: {{ payment.name }}</li>
+              <li>Payment ID: {{ payment.id }}</li>
+              <li>Time: {{ payment.timestamp }}</li>
+            </ul>
+          {% endif %}
+
+          {% if booking %}
+            <h5>Booking Info:</h5>
+            <ul style="list-style-type: none;">
+              <li>Booking ID: {{ booking.id }}</li>
+              <li>Customer Email: {{ booking.customer_email }}</li>
+              <li>Total Price: ₹{{ booking.total_price }}</li>
+              <li>Check-In: {{ booking.start_datetime }}</li>
+              <li>Check-Out: {{ booking.end_datetime }}</li>
+            </ul>
+          {% endif %}
+
+          {% if hall %}
+            <h5>Hall Info:</h5>
+            <ul style="list-style-type: none;">
+              <li>Name: {{ hall.name }}</li>
+              <li>Location: {{ hall.location }}</li>
+              <li>Capacity: {{ hall.seating_capacity }}</li>
+              <li>
+                Amenities:
+                {% for amenity in hall.amenities.all %}
+                  <span class="badge bg-secondary">{{ amenity.name }}</span>
+                {% empty %}
+                  <span class="text-muted">No amenities listed</span>
+                {% endfor %}
+              </li>
+            </ul>
+          {% endif %}
+        </b>
+      </div>
+    </div>
+
+    <p style="text-align: right; padding-right: 20px;">
+      <strong>Date/Time:</strong> <b>{{ current_datetime|date:"Y-m-d H:i:s" }}</b>
+    </p>
+  </div>
+{% endblock content %}

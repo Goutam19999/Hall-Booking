@@ -1,0 +1,200 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.hall-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: 0.3s;
+}
+
+.hall-card:hover {
+    transform: scale(1.02);
+}
+
+.hall-img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.br-theme-fontawesome-stars .br-widget a {
+    font-size: 1.5rem;
+}
+
+header {
+    background-color: #6c6ca3;
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 60px;
+}
+
+.right-part {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.right-part div,
+.right-part form {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.right-part div:hover {
+    color: #00adb5;
+}
+
+.right-part form button {
+    background: transparent;
+    border: 1px solid #fff;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.right-part form button:hover {
+    background: white;
+    color: #1e1e2f;
+}
+
+#user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #555;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #6c6ca3;
+}
+
+#user .floating-box {
+    position: absolute;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    /* Slightly transparent */
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 140px;
+    backdrop-filter: blur(6px);
+    /* nice blur behind transparent box */
+}
+
+#user .floating-box ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#user .floating-box ul li {
+    margin: 6px 0;
+}
+
+#user .floating-box ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+#user .floating-box ul li a:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+#user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.login-button {
+    background-color: #00adb5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-button:hover {
+    background-color: #008b93;
+}
+
+footer {
+    bottom: 0;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(162, 145, 122);
+    display: flex;
+    justify-content: space-between;
+
+}
+
+/* ..detail page.. */
+.slideshow-container {
+    position: relative;
+    top: 10px;
+    background: rgb(241, 235, 235);
+    width: 760px;
+    height: 530px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000
+}
+
+.slideshow-container .slideshow-image {
+    width: 730px;
+    height: 495px;
+    margin: 10px auto;
+    display: none"
+
+}
+
+.slideshow-container #prevBtn {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%
+}
+
+.slideshow-container #nextBtn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%
+}

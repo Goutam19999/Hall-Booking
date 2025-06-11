@@ -1,0 +1,63 @@
+{% extends 'event/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+      <h1 class="text-center mb-4">Available Halls for Booking</h1>
+      <div class="row">
+        {% for hall in halls %}
+        <div class="col-md-4 mb-4">
+          <a href="{% url 'hall-detail' hall.pk %}" style="text-decoration: none;">
+          <div class="card hall-card">
+            {% if hall.images.all %}
+            <img
+              src="{{ hall.images.first.image.url }}"
+              class="card-img-top hall-img"
+              alt="{{ hall.name }}"
+            />
+            {% else %}
+            <img
+              src="{% static 'img/download2.jpeg' %}"
+              class="card-img-top hall-img"
+              alt="Default Hall"
+            />
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ hall.name }}</h5>
+              <p class="card-text text-muted">{{ hall.location }}</p>
+              <p>
+                <strong>Seating:</strong> {{ hall.seating_capacity }} people
+              </p>
+              <p>
+                <strong>Price:</strong> ${{ hall.price_per_day }} / day
+              </p>
+
+              
+              <select
+                class="star-rating-display"
+                data-current-rating="{{ hall.rating }}"
+                disabled
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+
+              <p>
+                <strong>Amenities:</strong><br />
+                {% for amenity in hall.amenities.all %}
+                <span class="badge bg-secondary">{{ amenity.name }}</span>
+                {% empty %}
+                <span class="text-muted">No amenities listed</span>
+                {% endfor %}
+              </p>
+            </div>
+          </div>
+          </a>
+        </div>
+        
+        {% endfor %}
+      </div>
+    </div>
+    {% endblock content %}
